@@ -1,0 +1,13 @@
+.wrapper-navbar {
+    display: flex;
+    column-gap: 1rem;
+    padding: 2rem 0;
+}
+
+.wrapper-navbar .nav-link {
+    text-decoration: none;
+    padding: .8rem 3.2rem;
+    color: #fff;
+    background: #eb8193;
+    border-radius: 10px;
+}
