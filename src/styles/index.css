@@ -1,0 +1,27 @@
+.hero-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.hero-list {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    padding: 1rem;
+    box-shadow: 0px 4px 20px rgba(137, 121, 204, 0.12);
+    row-gap: .5rem;
+}
+
+.btn-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.btn-primary {
+    padding: .6rem 2rem;
+    color: #fff;
+    background: #eb8193;
+    border-radius: 10px;
+    cursor: pointer;
+}

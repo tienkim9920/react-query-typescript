@@ -18,13 +18,19 @@ const ListHero = () => {
     return (
         <>
             <h1>This is list page</h1>
-            {!isFetching && heros?.map((hero: IHero) => (
-                <div>
-                    <div>{hero.title}</div>
-                    <div>{hero.body}</div>
-                    <div>{hero.phone}</div>
-                </div>
-            ))}
+            <div className='hero-wrapper'>
+                {!isFetching && heros?.map((hero: IHero) => (
+                    <div className='hero-list'>
+                        <div>{hero.title}</div>
+                        <div>{hero.body}</div>
+                        <div>{hero.phone}</div>
+                        <div className='btn-wrapper'>
+                            <div className='btn-primary'>Delete</div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
             {isLoadingHeros && <div>Loading...</div>}
             {isErrorHeros && <div>Error...</div>}
         </>

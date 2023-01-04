@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { IBody } from '../interfaces/body.interface';
 import { IHero } from '../interfaces/hero.interface';
 import { ConfigAxios } from '../services/ConfigService';
