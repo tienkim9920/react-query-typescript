@@ -1,12 +1,11 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
-import NavBar from "./components/Navbar/index.tsx";
-import CreateHero from "./pages/create-hero/index.tsx";
-import DeleteHero from "./pages/delete-hero/index.tsx";
-import ListHero from "./pages/list/index.tsx";
-import PaginationHero from "./pages/pagination/index.tsx";
-import UpdateHero from "./pages/update/index.tsx";
+import NavBar from "./components/Navbar";
+import CreateHero from "./pages/create-hero";
+import DeleteHero from "./pages/delete-hero";
+import ListHero from "./pages/list";
+import PaginationHero from "./pages/pagination";
+import UpdateHero from "./pages/update";
 
 function App() {
   return (
