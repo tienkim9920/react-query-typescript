@@ -1,7 +1,7 @@
 export interface IHero {
-    _id: String,
-    title: String,
-    username: String,
-    body: String,
-    phone: String
+    _id?: string,
+    title?: string,
+    username?: string,
+    body?: string,
+    phone?: string
 }

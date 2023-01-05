@@ -12,7 +12,7 @@ export class ConfigAxios {
         return body;
     }
 
-    static POST_AXIOS(url: string, data: object) {
+    static POST_AXIOS(url: string, data: object): IBody {
         const body = {
             method: 'post',
             url,
