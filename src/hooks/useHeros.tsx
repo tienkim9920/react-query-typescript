@@ -1,25 +1,6 @@
-import axios from 'axios';
-import { useMutation, useQuery } from 'react-query';
-import { IBody } from '../interfaces/body.interface';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { IHero } from '../interfaces/hero.interface';
-import { ConfigAxios } from '../services/ConfigService';
-const mainURL = `http://localhost:8000`;
-
-
-// const postHeroList: IBody = ConfigAxios.POST_AXIOS(urlHeroList);
-
-const fetchHeroList = async (): Promise<IHero[]> => {
-    const url = mainURL + '/blogs';
-    const dataBody: IBody = ConfigAxios.GET_AXIOS(url);
-    const res = await axios(dataBody);
-    return res.data ?? [];
-};
-
-// const addHero = (hero: IHero): Promise<IHero[]> => {
-//     const url = mainURL + '/blogs';
-//     const dataBody: IBody = ConfigAxios.POST_AXIOS(url, hero);
-//     return axios(dataBody).then((response) => response.data);
-// }
+import { fetchAddHero, fetchDeleteHero, fetchHeroList } from '../services/HeroService';
 
 export const useHeroList = (onSuccess: () => void, onError: () => void) => {
     return useQuery<IHero[]>({
@@ -32,14 +13,36 @@ export const useHeroList = (onSuccess: () => void, onError: () => void) => {
     })
 }
 
-// export const mutationCreateHero = (onSuccess: () => void, onError: () => void) => {
-//     return useMutation<IHero>({
-//         mutationFn:
-//     })
-// }
+export const useAddHero = (onSuccess: () => void, onError: () => void) => {
+    const queryClient = useQueryClient();
+    return useMutation((hero: IHero) => fetchAddHero(hero), {
+        onSettled(_data, error, variables) {
+            queryClient.setQueryData<IHero[] | undefined>('heros', (old) => {
+                if (old) {
+                    return [...old, (_data?._id ? _data : {})];
+                } else {
+                    return [];
+                }
+            });
+        },
+        onSuccess,
+        onError,
+    });
+}
 
-// const mutation = useMutation({
-//     mutationFn: (newTodo) => {
-//       return axios.post('/todos', newTodo)
-//     },
-//   })
+export const useDeleteHero = (onSuccess: () => void, onError: () => void) => {
+    const queryClient = useQueryClient();
+    return useMutation((id: string) => fetchDeleteHero(id), {
+        onMutate: async (id: string) => {
+            queryClient.setQueryData<IHero[] | undefined>('heros', (old) => {
+                if (old) {
+                    return [...old.filter(item => item._id !== id)];
+                } else {
+                    return [];
+                }
+            });
+        },
+        onSuccess,
+        onError,
+    });
+}
